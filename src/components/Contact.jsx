@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { FaGithub, FaLinkedin } from 'react-icons/fa'; // Importing GitHub and LinkedIn icons
 
 function Contact() {
   // State variables for form inputs
@@ -16,8 +17,9 @@ function Contact() {
       <p className="text-lg px-4">
         Reach out to discuss exciting opportunities or just say hello.
       </p>
+
       <form
-        action="https://getform.io/f/aolgxpdb" // Getform endpoint for handling form submission
+        action="https://getform.io/f/aolgxpdb"
         method="POST"
         className="w-full max-w-md mt-6"
       >
@@ -26,7 +28,7 @@ function Contact() {
           name="name" // Name input field
           placeholder="Your Name"
           value={name}
-          onChange={(e) => setName(e.target.value)} // Update name state on change
+          onChange={(e) => setName(e.target.value)}
           className="mb-4 p-2 w-full bg-gray-800 text-white border border-purple-400 rounded"
           required
         />
@@ -35,7 +37,7 @@ function Contact() {
           name="email" // Email input field
           placeholder="Your Email"
           value={email}
-          onChange={(e) => setEmail(e.target.value)} // Update email state on change
+          onChange={(e) => setEmail(e.target.value)}
           className="mb-4 p-2 w-full bg-gray-800 text-white border border-purple-400 rounded"
           required
         />
@@ -44,7 +46,7 @@ function Contact() {
           name="mobile" // Mobile number input field
           placeholder="Your Mobile Number"
           value={mobile}
-          onChange={(e) => setMobile(e.target.value)} // Update mobile state on change
+          onChange={(e) => setMobile(e.target.value)}
           className="mb-4 p-2 w-full bg-gray-800 text-white border border-purple-400 rounded"
           required
         />
@@ -52,7 +54,7 @@ function Contact() {
           name="message" // Message input field
           placeholder="Your Message"
           value={message}
-          onChange={(e) => setMessage(e.target.value)} // Update message state on change
+          onChange={(e) => setMessage(e.target.value)}
           className="mb-4 p-2 w-full bg-gray-800 text-white border border-purple-400 rounded"
           rows="4"
           required
@@ -64,6 +66,16 @@ function Contact() {
           Send Message
         </button>
       </form>
+
+      {/* Social media links */}
+      <div className="flex justify-center mt-8 space-x-4">
+        <a href="https://github.com/uvkendre" target="_blank" rel="noopener noreferrer" className="text-purple-400 hover:text-purple-500">
+          <FaGithub size={30} />
+        </a>
+        <a href="https://www.linkedin.com/in/yuvraj-kendre-5a496b242/" target="_blank" rel="noopener noreferrer" className="text-purple-400 hover:text-purple-500">
+          <FaLinkedin size={30} />
+        </a>
+      </div>
     </div>
   );
 }
