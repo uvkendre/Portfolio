@@ -1,20 +1,20 @@
 import React, { useState } from 'react';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import { AiOutlineHome, AiOutlineUser, AiOutlineFundProjectionScreen, AiOutlineExperiment, AiOutlineMail } from 'react-icons/ai';
-import { ReactTyped } from 'react-typed'; // Changed to named import
-import { Link } from 'react-scroll'; // Import Link from react-scroll
-import ThreeDBackground from './ThreeDBackground'; // Import the 3D background
-
+import { ReactTyped } from 'react-typed'; 
+import { Link } from 'react-scroll'; 
+import ThreeDBackground from './ThreeDBackground';
 function Navbar() {
-  const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isMobileMenuOpen, setMobileMenuOpen] = useState(false); // State to manage mobile menu visibility
 
+  // Toggle mobile menu open/close
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!isMobileMenuOpen);
   };
 
   return (
     <div className="max-w-screen-2xl mx-auto container px-4 shadow-2xl fixed bg-gray-900 z-10">
-      <ThreeDBackground /> {/* Add the 3D Background component */}
+      <ThreeDBackground /> {/* Include the 3D Background component */}
       <div className="flex justify-between py-4 h-16 items-center">
         <div className="flex items-center space-x-2 px-10">
           <div className="flex flex-col mt-2">
@@ -30,6 +30,7 @@ function Navbar() {
           </div>
         </div>
 
+        {/* Desktop Navigation Links */}
         <div className="hidden md:flex">
           <ul className="flex space-x-6 items-center gap-8 pr-8">
             <li>
@@ -65,6 +66,7 @@ function Navbar() {
           </ul>
         </div>
 
+        {/* Mobile Menu Toggle Button */}
         <div className="md:hidden">
           <button onClick={toggleMobileMenu} aria-label="Toggle Menu" className="text-[#6366f1]">
             {isMobileMenuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
@@ -72,6 +74,7 @@ function Navbar() {
         </div>
       </div>
 
+      {/* Mobile Navigation Links */}
       {isMobileMenuOpen && (
         <div className="md:hidden bg-gray-900">
           <ul className="flex flex-col space-y-4 items-center p-4">

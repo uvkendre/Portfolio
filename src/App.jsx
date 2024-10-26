@@ -1,4 +1,3 @@
-// src/App.jsx
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Navbar from './components/Navbar';
@@ -13,10 +12,11 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 
 function App() {
+  // Initialize AOS for animations on scroll
   useEffect(() => {
     AOS.init({
-      duration: 1000, // Animation duration
-      once: false, // Allow animations to happen every time they are in view
+      duration: 1000, 
+      once: false, 
     });
   }, []);
 
@@ -28,28 +28,31 @@ function App() {
         initial={{ opacity: 0 }} 
         animate={{ opacity: 1 }} 
         transition={{ duration: 0.5 }}
-        style={{ position: 'relative', zIndex: 1 }} // Content above the background
+        style={{ position: 'relative', zIndex: 1 }} 
       >
         <Navbar />
         
-        {/* Wrapping each component with AOS divs */}
+        {/* Home Section with AOS animation */}
         <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-offset="100" style={{ paddingBottom: '20px' }}>
           <Home />
         </div>
 
+        {/* About Section with AOS animation */}
         <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-offset="100" style={{ paddingBottom: '20px' }}>
           <About />
         </div>
 
+        {/* Projects Section with AOS animation */}
         <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-offset="100" style={{ paddingBottom: '20px' }}>
           <Projects />
         </div>
 
-        {/* Skills component without AOS but with scroll effects */}
+        {/* Skills Section without AOS but with scroll effects */}
         <div style={{ paddingBottom: '20px' }}>
           <Skills />
         </div>
 
+        {/* Contact Section with AOS animation */}
         <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-offset="100" style={{ paddingBottom: '20px' }}>
           <Contact />
         </div>

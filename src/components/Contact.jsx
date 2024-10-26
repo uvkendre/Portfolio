@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 function Contact() {
+  // State variables for form inputs
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [mobile, setMobile] = useState('');
@@ -16,42 +17,42 @@ function Contact() {
         Reach out to discuss exciting opportunities or just say hello.
       </p>
       <form
-        action="https://getform.io/f/aolgxpdb" // Getform endpoint
+        action="https://getform.io/f/aolgxpdb" // Getform endpoint for handling form submission
         method="POST"
         className="w-full max-w-md mt-6"
       >
         <input
           type="text"
-          name="name" // Name attribute added
+          name="name" // Name input field
           placeholder="Your Name"
           value={name}
-          onChange={(e) => setName(e.target.value)}
+          onChange={(e) => setName(e.target.value)} // Update name state on change
           className="mb-4 p-2 w-full bg-gray-800 text-white border border-purple-400 rounded"
           required
         />
         <input
           type="email"
-          name="email" // Name attribute added
+          name="email" // Email input field
           placeholder="Your Email"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(e) => setEmail(e.target.value)} // Update email state on change
           className="mb-4 p-2 w-full bg-gray-800 text-white border border-purple-400 rounded"
           required
         />
         <input
           type="tel"
-          name="mobile" // Name attribute added
+          name="mobile" // Mobile number input field
           placeholder="Your Mobile Number"
           value={mobile}
-          onChange={(e) => setMobile(e.target.value)}
+          onChange={(e) => setMobile(e.target.value)} // Update mobile state on change
           className="mb-4 p-2 w-full bg-gray-800 text-white border border-purple-400 rounded"
           required
         />
         <textarea
-          name="message" // Name attribute added
+          name="message" // Message input field
           placeholder="Your Message"
           value={message}
-          onChange={(e) => setMessage(e.target.value)}
+          onChange={(e) => setMessage(e.target.value)} // Update message state on change
           className="mb-4 p-2 w-full bg-gray-800 text-white border border-purple-400 rounded"
           rows="4"
           required
