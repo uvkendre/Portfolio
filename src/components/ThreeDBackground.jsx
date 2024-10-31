@@ -18,22 +18,6 @@ const ThreeDBackground = () => {
     directionalLight.position.set(5, 5, 5);
     scene.add(directionalLight);
 
-    // Create particle system
-    const particleCount = 2000;
-    const particlesGeometry = new THREE.BufferGeometry();
-    const particlesPositions = new Float32Array(particleCount * 3);
-
-    for (let i = 0; i < particleCount; i++) {
-      particlesPositions[i * 3] = (Math.random() - 0.5) * 100;
-      particlesPositions[i * 3 + 1] = (Math.random() - 0.5) * 100;
-      particlesPositions[i * 3 + 2] = (Math.random() - 0.5) * 100;
-    }
-
-    particlesGeometry.setAttribute('position', new THREE.BufferAttribute(particlesPositions, 3));
-    const particleMaterial = new THREE.PointsMaterial({ color: 0x00aaff, size: 0.1 });
-    const particleSystem = new THREE.Points(particlesGeometry, particleMaterial);
-    scene.add(particleSystem);
-
     // Create star field
     const starsCount = 5000;
     const starsGeometry = new THREE.BufferGeometry();
@@ -56,12 +40,7 @@ const ThreeDBackground = () => {
     // Animation loop
     const animate = () => {
       requestAnimationFrame(animate);
-
-      // Rotate particle system and stars
-      particleSystem.rotation.x += 0.001;
-      particleSystem.rotation.y += 0.001;
-      stars.rotation.z += 0.001;
-
+      stars.rotation.z += 0.001; // Rotate stars
       renderer.render(scene, camera);
     };
 
