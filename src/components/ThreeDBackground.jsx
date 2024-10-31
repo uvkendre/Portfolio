@@ -1,12 +1,8 @@
 import React, { useRef, useEffect } from 'react';
 import * as THREE from 'three';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 
 const ThreeDBackground = () => {
   const sceneRef = useRef();
-  const mixerRef = useRef();
-  const moonRef = useRef(); 
-  const astronautRef = useRef(); 
 
   useEffect(() => {
     // Create scene, camera, and renderer
@@ -38,60 +34,6 @@ const ThreeDBackground = () => {
     const particleSystem = new THREE.Points(particlesGeometry, particleMaterial);
     scene.add(particleSystem);
 
-    // Load the astronaut model
-    const loader = new GLTFLoader();
-    loader.load(
-      'Astronaut.glb', 
-      (gltf) => {
-        const model = gltf.scene;
-        model.scale.set(1, 1, 1);
-        astronautRef.current = model; 
-        model.position.set(-5, -1.3, -2);
-        model.rotation.set(0, 46 * (Math.PI / 180), 0);
-
-        model.traverse((child) => {
-          if (child.isMesh) {
-            const glowMaterial = new THREE.MeshStandardMaterial({
-              color: 0xf1f1f1,
-              emissive: 0x00ccff,
-              emissiveIntensity: 0.1,
-            });
-            child.material = glowMaterial;
-          }
-        });
-
-        scene.add(model);
-
-        const mixer = new THREE.AnimationMixer(model);
-        mixerRef.current = mixer;
-        if (gltf.animations.length > 0) {
-          gltf.animations.forEach((clip) => {
-            mixer.clipAction(clip).play();
-          });
-        }
-      },
-      undefined,
-      (error) => {
-        console.error('Error loading astronaut model:', error);
-      }
-    );
-
-    // Load the moon model
-    loader.load(
-      'moon.glb', 
-      (gltf) => {
-        const moonModel = gltf.scene;
-        moonModel.scale.set(3, 3, 3); // Default size for desktop
-        moonRef.current = moonModel; // Store reference to the moon model
-        moonModel.position.set(3.8, 1, -1.2);
-        scene.add(moonModel);
-      },
-      undefined,
-      (error) => {
-        console.error('Error loading moon model:', error);
-      }
-    );
-
     // Create star field
     const starsCount = 5000;
     const starsGeometry = new THREE.BufferGeometry();
@@ -112,33 +54,13 @@ const ThreeDBackground = () => {
     camera.position.z = 3;
 
     // Animation loop
-    const clock = new THREE.Clock();
     const animate = () => {
       requestAnimationFrame(animate);
-
-      // Update animation mixer
-      if (mixerRef.current) {
-        mixerRef.current.update(clock.getDelta());
-      }
 
       // Rotate particle system and stars
       particleSystem.rotation.x += 0.001;
       particleSystem.rotation.y += 0.001;
       stars.rotation.z += 0.001;
-
-      // Rotate the moon for a dynamic effect
-      if (moonRef.current) {
-        moonRef.current.rotation.y += 0.001;
-      }
-
-      // Adjust sizes based on screen width
-      const scaleFactor = window.innerWidth < 768 ? 0.5 : 1;
-      if (astronautRef.current) {
-        astronautRef.current.scale.set(1 * scaleFactor, 1 * scaleFactor, 1 * scaleFactor);
-      }
-      if (moonRef.current) {
-        moonRef.current.scale.set(3 * scaleFactor, 3 * scaleFactor, 3 * scaleFactor);
-      }
 
       renderer.render(scene, camera);
     };
