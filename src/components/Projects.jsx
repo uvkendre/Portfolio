@@ -4,6 +4,11 @@ function Projects() {
   // Array of project objects containing title, description, and link
   const projects = [
     {
+      title: 'PDF Viewer',
+      description: 'A web-based PDF viewer application that allows users to view, scroll, and navigate through PDF documents directly in the browser. Built with modern web technologies for a seamless document viewing experience.',
+      link: 'https://uvkendre.github.io/PDF-Viewer/',
+    },
+    {
       title: 'Ghumte Haii',
       description: 'A travel platform for solo travelers and adventure enthusiasts.',
       link: 'https://uvkendre.github.io/GhumteHaii/',
