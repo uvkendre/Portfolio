@@ -4,6 +4,11 @@ function Projects() {
   // Array of project objects containing title, description, and link
   const projects = [
     {
+      title: 'E-Shop',
+      description: 'A full-stack e-commerce application that allows users to browse products, add them to their cart, and securely checkout. Built with modern web technologies, it provides a seamless shopping experience with features like user authentication, product management, and payment integration.',
+      link: 'https://uvkendre.github.io/E-Shop/',
+    },
+    {
       title: 'PDF Viewer',
       description: 'A web-based PDF viewer application that allows users to view, scroll, and navigate through PDF documents directly in the browser. Built with modern web technologies for a seamless document viewing experience.',
       link: 'https://uvkendre.github.io/PDF-Viewer/',
@@ -27,6 +32,16 @@ function Projects() {
       title: 'Password Generator',
       description: 'A simple web app to generate secure passwords.',
       link: 'https://uvkendre.github.io/Password-Generator/',
+    },
+    {
+      title: 'E-Shop',
+      description: 'A full-stack e-commerce application that allows users to browse products, add them to their cart, and securely checkout. Built with modern web technologies, it provides a seamless shopping experience with features like user authentication, product management, and payment integration.',
+      link: 'https://uvkendre.github.io/E-Shop/',
+    },
+    {
+      title: 'E-Shop',
+      description: 'A full-stack e-commerce application that allows users to browse products, add them to their cart, and securely checkout. Built with modern web technologies, it provides a seamless shopping experience with features like user authentication, product management, and payment integration.',
+      link: 'https://uvkendre.github.io/E-Shop/',
     },
   ];
 
