@@ -1,20 +1,98 @@
 import React from 'react';
+import { motion } from 'framer-motion';
+import { FaGithub, FaLinkedin, FaCode, FaGraduationCap, FaLaptopCode } from 'react-icons/fa';
 
 function About() {
   return (
-    <div id="about" className="w-full h-screen bg-black flex flex-col justify-center items-center text-center px-4">
-      <h2 className="text-3xl font-bold text-teal-400 mb-4">About Me</h2>
-      <p className="max-w-xl text-lg px-4">
-        Hey there! I’m Yuvraj Kendre, a 2nd-year BSc student passionate about coding. My unconventional journey has taught me that while a fancy campus is nice, the internet is an invaluable resource. <br /> 
+    <div id="about" className="min-h-screen py-20">
+      <div className="max-w-6xl mx-auto px-4">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-4xl md:text-5xl font-bold text-purple-400 mb-6">About Me</h2>
+          <div className="w-24 h-1 bg-purple-500/80 mx-auto mb-8" />
+        </motion.div>
 
-        Currently, I’m diving into Express.js and enhancing my skills in the MERN stack. I’m dedicated to building functional and impactful projects. One of my key projects is **Ghumte Haii**, a platform designed for solo travelers and adventure enthusiasts, offering resources like vehicle information and real-time weather updates to make travel easier and more enjoyable. <br />
+        <div className="grid md:grid-cols-2 gap-12 items-center">
+          {/* Profile Image */}
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="relative group"
+          >
+            <div className="w-[280px] h-[280px] md:w-[400px] md:h-[400px] mx-auto rounded-2xl overflow-hidden border-4 border-purple-500/80 shadow-xl shadow-purple-500/20 backdrop-blur-sm">
+              <img
+                src="/profile.JPG"
+                alt="Yuvraj Kendre"
+                className="w-full h-full object-cover object-center transform scale-[1.8] origin-top"
+              />
+            </div>
+            {/* Decorative elements */}
+            <div className="absolute -top-4 -left-4 w-full h-full border-4 border-purple-400/30 rounded-2xl animate-pulse" />
+          </motion.div>
 
-        <strong>What Drives Me:</strong> I believe coding is about creating experiences. My mission is to develop applications that are user-friendly and visually appealing, constantly learning and adapting to new technologies. <br />
+          {/* About Content */}
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="backdrop-blur-sm bg-purple-900/10 p-8 rounded-xl border border-purple-500/20"
+          >
+            <h3 className="text-3xl font-bold mb-6 text-purple-400">Full Stack Developer</h3>
+            <div className="space-y-4 text-gray-300">
+              <p>
+                🚀 Welcome! I'm Yuvraj Kendre, a passionate Full Stack Developer with a 
+                strong foundation in web development and a keen eye for creating 
+                user-friendly applications.
+              </p>
+              <p>
+                💻 I specialize in the MERN stack and have a deep interest in building 
+                scalable web applications that solve real-world problems.
+              </p>
+              <p>
+                🎓 My journey in tech is driven by continuous learning and staying 
+                up-to-date with the latest technologies and best practices.
+              </p>
+            </div>
 
-        <strong>Current Projects:</strong> I'm focused on enhancing **Ghumte Haii** to provide valuable resources that ensure safe and enjoyable journeys for travelers. <br />
+            {/* Education & Experience */}
+            <div className="mt-8 space-y-4">
+              <div className="flex items-center gap-3 text-gray-200">
+                <FaGraduationCap className="text-purple-400 text-xl" />
+                <span>B.Sc. from SRTMU, Nanded</span>
+              </div>
+              <div className="flex items-center gap-3 text-gray-200">
+                <FaLaptopCode className="text-purple-400 text-xl" />
+                <span>Full Stack Developer</span>
+              </div>
+            </div>
 
-        <strong>Fun Facts About Me:</strong> I enjoy attending tech meetups and hackathons to collaborate and share ideas with fellow developers.
-      </p>
+            {/* Social Links */}
+            <div className="mt-8 flex space-x-6">
+              <a
+                href="https://github.com/uvkendre"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-300 hover:text-purple-400 transition-colors"
+              >
+                <FaGithub size={24} />
+              </a>
+              <a
+                href="https://linkedin.com/in/yuvrajkendre"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-300 hover:text-purple-400 transition-colors"
+              >
+                <FaLinkedin size={24} />
+              </a>
+            </div>
+          </motion.div>
+        </div>
+      </div>
     </div>
   );
 }

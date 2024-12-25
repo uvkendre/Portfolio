@@ -1,95 +1,51 @@
-import React, { useEffect, useRef } from 'react';
-import { gsap } from 'gsap';
-import { FaHtml5, FaCss3Alt, FaJsSquare, FaReact, FaNodeJs } from 'react-icons/fa';
-import { SiMongodb, SiExpress, SiPostman, SiGit, SiGithub } from 'react-icons/si';
-import { TbBrandThreejs } from 'react-icons/tb';
-import { GiProgression } from 'react-icons/gi';
+import React from 'react';
+import { motion } from 'framer-motion';
+import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaNodeJs, FaDatabase, FaGitAlt, FaDocker } from 'react-icons/fa';
+import { SiMongodb, SiExpress, SiTailwindcss, SiTypescript } from 'react-icons/si';
+
+const skills = [
+  { name: 'HTML5', icon: FaHtml5, color: 'text-orange-500' },
+  { name: 'CSS3', icon: FaCss3Alt, color: 'text-blue-500' },
+  { name: 'JavaScript', icon: FaJs, color: 'text-yellow-400' },
+  { name: 'TypeScript', icon: SiTypescript, color: 'text-blue-600' },
+  { name: 'React', icon: FaReact, color: 'text-cyan-400' },
+  { name: 'Node.js', icon: FaNodeJs, color: 'text-green-500' },
+  { name: 'Express', icon: SiExpress, color: 'text-gray-400' },
+  { name: 'MongoDB', icon: SiMongodb, color: 'text-green-500' },
+  { name: 'TailwindCSS', icon: SiTailwindcss, color: 'text-cyan-400' },
+  { name: 'Git', icon: FaGitAlt, color: 'text-orange-600' },
+  { name: 'Docker', icon: FaDocker, color: 'text-blue-500' },
+  { name: 'SQL', icon: FaDatabase, color: 'text-blue-400' },
+];
 
 function Skills() {
-  const skillsRef = useRef(null);
-
-  useEffect(() => {
-    // Create an Intersection Observer to trigger animations
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          animateIcons(entry.isIntersecting);
-        });
-      },
-      {
-        threshold: 0.1, // Trigger animation when 10% of the element is visible
-      }
-    );
-
-    // Observe the skills section for visibility
-    if (skillsRef.current) {
-      observer.observe(skillsRef.current);
-    }
-
-    return () => {
-      // Clean up the observer on component unmount
-      if (skillsRef.current) {
-        observer.unobserve(skillsRef.current);
-      }
-    };
-  }, []);
-
-  // Animate icons on entrance and exit
-  const animateIcons = (isEntering) => {
-    const icons = skillsRef.current.children;
-
-    if (isEntering) {
-      gsap.fromTo(
-        icons,
-        { y: -100, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          stagger: 0.2,
-          duration: 1.2,
-          ease: 'bounce.out',
-        }
-      );
-    } else {
-      gsap.to(icons, {
-        y: -50,
-        opacity: 0,
-        stagger: 0.2,
-        duration: 0.5,
-        ease: 'power1.inOut',
-      });
-    }
-  };
-
-  // List of skills with corresponding icons
-  const skills = [
-    { icon: <FaHtml5 size={50} className="text-orange-600" />, label: 'HTML' },
-    { icon: <FaCss3Alt size={50} className="text-blue-600" />, label: 'CSS' },
-    { icon: <FaJsSquare size={50} className="text-yellow-500" />, label: 'JavaScript' },
-    { icon: <FaReact size={50} className="text-blue-400" />, label: 'React' },
-    { icon: <FaNodeJs size={50} className="text-green-600" />, label: 'Node.js' },
-    { icon: <SiMongodb size={50} className="text-green-700" />, label: 'MongoDB' },
-    { icon: <SiExpress size={50} className="text-gray-600" />, label: 'Express' },
-    { icon: <SiPostman size={50} className="text-orange-600" />, label: 'Postman' },
-    { icon: <SiGit size={50} className="text-red-500" />, label: 'Git' },
-    { icon: <SiGithub size={50} className="text-black" />, label: 'GitHub' },
-    { icon: <TbBrandThreejs size={50} className="text-white" />, label: 'Three.js' },
-    { icon: <GiProgression size={50} className="text-green-400" />, label: 'Learning New Skills' },
-  ];
-
   return (
-    <div id="skills" ref={skillsRef} className="w-full bg-black flex flex-col justify-center items-center text-center py-16 px-4">
-      <h2 className="text-4xl font-bold text-purple-400 mb-6">Skills</h2>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-        {skills.map((skill, index) => (
-          <div
-            key={index}
-            className="flex flex-col items-center bg-slate-700 border-2 border-purple-400 p-4 rounded-lg"
-          >
-            {skill.icon}
-            <span className="mt-2 text-white">{skill.label}</span>
-          </div>
-        ))}
+    <div id="skills" className="min-h-screen py-20">
+      <div className="max-w-6xl mx-auto px-4">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-4xl md:text-5xl font-bold text-purple-400 mb-6">Skills</h2>
+          <div className="w-24 h-1 bg-purple-500/80 mx-auto mb-8" />
+        </motion.div>
+
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+          {skills.map((skill, index) => (
+            <motion.div
+              key={skill.name}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              className="backdrop-blur-sm bg-purple-900/10 p-6 rounded-xl border border-purple-500/20 flex flex-col items-center hover:border-purple-500/40 transition-all group"
+            >
+              <skill.icon className={`text-5xl ${skill.color} mb-4 group-hover:scale-110 transition-transform`} />
+              <span className="text-gray-300 font-medium">{skill.name}</span>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </div>
   );

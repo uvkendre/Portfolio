@@ -1,11 +1,72 @@
-@import url('https://fonts.googleapis.com/css2?family=Afacad+Flux:wght@100..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-html, body {
-    font-family: 'Afacad Flux'; 
-    scroll-behavior: smooth; 
-    scrollbar-width: none; 
+@layer base {
+  html {
+    font-family: 'Poppins', sans-serif;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-black text-white;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-black;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-purple-500/50 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-purple-500;
+  }
+}
+
+/* Utility classes */
+.glass-effect {
+  @apply bg-purple-900/20 backdrop-blur-sm border border-purple-500/20;
+}
+
+.section-title {
+  @apply text-4xl md:text-5xl font-bold text-purple-400 mb-6;
+}
+
+.section-divider {
+  @apply w-24 h-1 bg-purple-500/80 mx-auto mb-8;
+}
+
+.hover-effect {
+  @apply transition-all duration-300 hover:scale-105;
+}
+
+/* Animation classes */
+.fade-in {
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Text selection color */
+::selection {
+  @apply bg-purple-500/30 text-white;
 }

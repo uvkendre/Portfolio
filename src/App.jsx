@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
-import { motion } from 'framer-motion';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 import Navbar from './components/Navbar';
 import Home from './components/Home';
 import About from './components/About';
@@ -7,61 +8,37 @@ import Projects from './components/Projects';
 import Skills from './components/Skills';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
-import ThreeDBackground from './components/ThreeDBackground'; 
-import AOS from 'aos';
-import 'aos/dist/aos.css';
+import ThreeDBackground from './components/ThreeDBackground';
 
 function App() {
-  // Initialize AOS for animations on scroll
   useEffect(() => {
+    // Initialize AOS animation library
     AOS.init({
-      duration: 1000, 
-      once: false, 
+      duration: 1000,
+      once: true,
+      easing: 'ease',
     });
   }, []);
 
   return (
-    <div style={{ position: 'relative', width: '100%', height: '100vh' }}>
-      <ThreeDBackground />
-      <motion.div 
-        className="bg-black text-white"
-        initial={{ opacity: 0 }} 
-        animate={{ opacity: 1 }} 
-        transition={{ duration: 0.5 }}
-        style={{ position: 'relative', zIndex: 1 }} 
-      >
+    <div className="relative min-h-screen">
+      {/* Three.js Background */}
+      <div className="fixed inset-0 z-0">
+        <ThreeDBackground />
+      </div>
+
+      {/* Content */}
+      <div className="relative z-10">
         <Navbar />
-        
-        {/* Home Section with AOS animation */}
-        <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-offset="100" style={{ paddingBottom: '20px' }}>
+        <main>
           <Home />
-        </div>
-
-        {/* About Section with AOS animation */}
-        <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-offset="100" style={{ paddingBottom: '20px' }}>
           <About />
-        </div>
-
-        {/* Projects Section with AOS animation */}
-        <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-offset="100" style={{ paddingBottom: '20px' }}>
           <Projects />
-        </div>
-
-        {/* Skills Section without AOS but with scroll effects */}
-        <div style={{ paddingBottom: '20px' }}>
           <Skills />
-        </div>
-
-        {/* Contact Section with AOS animation */}
-        <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-offset="100" style={{ paddingBottom: '20px' }}>
           <Contact />
-        </div>
-
-        {/* Footer without AOS effects */}
-        <div style={{ paddingBottom: '20px' }}>
-          <Footer />
-        </div>
-      </motion.div>
+        </main>
+        <Footer />
+      </div>
     </div>
   );
 }

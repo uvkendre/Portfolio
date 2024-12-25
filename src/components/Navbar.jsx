@@ -1,118 +1,48 @@
-import React, { useState } from 'react';
-import { FaBars, FaTimes } from 'react-icons/fa';
-import { AiOutlineHome, AiOutlineUser, AiOutlineFundProjectionScreen, AiOutlineExperiment, AiOutlineMail } from 'react-icons/ai';
-import { ReactTyped } from 'react-typed'; 
-import { Link } from 'react-scroll'; 
-import ThreeDBackground from './ThreeDBackground';
-function Navbar() {
-  const [isMobileMenuOpen, setMobileMenuOpen] = useState(false); // State to manage mobile menu visibility
+import React from 'react';
+import { Link } from 'react-scroll';
+import { motion } from 'framer-motion';
+import { FaHome, FaUser, FaCode, FaCog, FaEnvelope } from 'react-icons/fa';
 
-  // Toggle mobile menu open/close
-  const toggleMobileMenu = () => {
-    setMobileMenuOpen(!isMobileMenuOpen);
-  };
-
+const Navbar = () => {
   return (
-    <div className="max-w-screen-2xl mx-auto container px-4 shadow-2xl fixed bg-gray-900 z-10">
-      <ThreeDBackground /> {/* Include the 3D Background component */}
-      <div className="flex justify-between py-4 h-16 items-center">
-        <div className="flex items-center space-x-2 px-10">
-          <div className="flex flex-col mt-2">
-            <p className="text-xl font-bold text-[#6366f1]">
-              <ReactTyped
-                strings={["Full Stack Developer", "Programmer", "Self-Taught"]}
-                typeSpeed={40}
-                backSpeed={50}
-                loop
-                style={{ display: 'inline-block' }} 
-              />
-            </p>
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-[#0a0a1a]/80 backdrop-blur-sm">
+      <div className="max-w-6xl mx-auto px-4 py-4">
+        <div className="flex justify-between items-center">
+          {/* Logo */}
+          <Link
+            to="home"
+            smooth={true}
+            duration={500}
+            className="text-xl font-semibold text-purple-400 cursor-pointer"
+          >
+            YK
+          </Link>
+
+          {/* Navigation Links */}
+          <div className="flex items-center space-x-8">
+            {[
+              { to: 'home', icon: FaHome, text: 'Home' },
+              { to: 'about', icon: FaUser, text: 'About' },
+              { to: 'projects', icon: FaCode, text: 'Projects' },
+              { to: 'skills', icon: FaCog, text: 'Skills' },
+              { to: 'contact', icon: FaEnvelope, text: 'Contact' },
+            ].map((item) => (
+              <Link
+                key={item.to}
+                to={item.to}
+                smooth={true}
+                duration={500}
+                className="flex items-center space-x-2 text-gray-300 hover:text-purple-400 transition-colors cursor-pointer"
+              >
+                <item.icon className="text-sm" />
+                <span>{item.text}</span>
+              </Link>
+            ))}
           </div>
         </div>
-
-        {/* Desktop Navigation Links */}
-        <div className="hidden md:flex">
-          <ul className="flex space-x-6 items-center gap-8 pr-8">
-            <li>
-              <Link to="home" smooth={true} duration={500} className="flex items-center space-x-1 text-white hover:text-[#6366f1] transition-colors duration-300">
-                <AiOutlineHome />
-                <span>Home</span>
-              </Link>
-            </li>
-            <li>
-              <Link to="about" smooth={true} duration={500} className="flex items-center space-x-1 text-white hover:text-[#6366f1] transition-colors duration-300">
-                <AiOutlineUser />
-                <span>About</span>
-              </Link>
-            </li>
-            <li>
-              <Link to="projects" smooth={true} duration={500} className="flex items-center space-x-1 text-white hover:text-[#6366f1] transition-colors duration-300">
-                <AiOutlineFundProjectionScreen />
-                <span>Projects</span>
-              </Link>
-            </li>
-            <li>
-              <Link to="skills" smooth={true} duration={500} className="flex items-center space-x-1 text-white hover:text-[#6366f1] transition-colors duration-300">
-                <AiOutlineExperiment />
-                <span>Skills</span>
-              </Link>
-            </li>
-            <li>
-              <Link to="contact" smooth={true} duration={500} className="flex items-center space-x-1 text-white hover:text-[#6366f1] transition-colors duration-300">
-                <AiOutlineMail />
-                <span>Contact</span>
-              </Link>
-            </li>
-          </ul>
-        </div>
-
-        {/* Mobile Menu Toggle Button */}
-        <div className="md:hidden">
-          <button onClick={toggleMobileMenu} aria-label="Toggle Menu" className="text-[#6366f1]">
-            {isMobileMenuOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
-          </button>
-        </div>
       </div>
-
-      {/* Mobile Navigation Links */}
-      {isMobileMenuOpen && (
-        <div className="md:hidden bg-gray-900">
-          <ul className="flex flex-col space-y-4 items-center p-4">
-            <li>
-              <Link to="home" smooth={true} duration={500} className="flex items-center space-x-1 text-white hover:text-[#6366f1] transition-colors duration-300">
-                <AiOutlineHome />
-                <span>Home</span>
-              </Link>
-            </li>
-            <li>
-              <Link to="about" smooth={true} duration={500} className="flex items-center space-x-1 text-white hover:text-[#6366f1] transition-colors duration-300">
-                <AiOutlineUser />
-                <span>About</span>
-              </Link>
-            </li>
-            <li>
-              <Link to="projects" smooth={true} duration={500} className="flex items-center space-x-1 text-white hover:text-[#6366f1] transition-colors duration-300">
-                <AiOutlineFundProjectionScreen />
-                <span>Projects</span>
-              </Link>
-            </li>
-            <li>
-              <Link to="skills" smooth={true} duration={500} className="flex items-center space-x-1 text-white hover:text-[#6366f1] transition-colors duration-300">
-                <AiOutlineExperiment />
-                <span>Skills</span>
-              </Link>
-            </li>
-            <li>
-              <Link to="contact" smooth={true} duration={500} className="flex items-center space-x-1 text-white hover:text-[#6366f1] transition-colors duration-300">
-                <AiOutlineMail />
-                <span>Contact</span>
-              </Link>
-            </li>
-          </ul>
-        </div>
-      )}
-    </div>
+    </nav>
   );
-}
+};
 
 export default Navbar;
