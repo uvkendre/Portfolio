@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://uvkendre.github.io/sitemap.xml

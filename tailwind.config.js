@@ -7,10 +7,16 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Poppins', 'sans-serif'],
+        sans: ['Poppins', 'sans-serif'], // This makes Poppins the default font
       },
       animation: {
-        'spin-slow': 'spin 20s linear infinite',
+        'float': 'float 3s ease-in-out infinite',
+      },
+      keyframes: {
+        float: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-10px)' },
+        }
       }
     },
   },

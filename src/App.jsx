@@ -1,44 +1,41 @@
-import React, { useEffect } from 'react';
-import AOS from 'aos';
-import 'aos/dist/aos.css';
-import Navbar from './components/Navbar';
-import Home from './components/Home';
-import About from './components/About';
-import Projects from './components/Projects';
-import Skills from './components/Skills';
-import Contact from './components/Contact';
-import Footer from './components/Footer';
-import ThreeDBackground from './components/ThreeDBackground';
+import React, { Suspense, lazy } from 'react';
+import CursorEffect from './components/CursorEffect';
+import LoadingSpinner from './components/LoadingSpinner';
+import PageTransition from './components/PageTransition';
+import StarBackground from './components/StarBackground';
+
+// Lazy load components for better performance
+const Navbar = lazy(() => import('./components/Navbar'));
+const Home = lazy(() => import('./components/Home'));
+const About = lazy(() => import('./components/About'));
+const Skills = lazy(() => import('./components/Skills'));
+const Projects = lazy(() => import('./components/Projects'));
+const Experience = lazy(() => import('./components/Experience'));
+const Contact = lazy(() => import('./components/Contact'));
+const Footer = lazy(() => import('./components/Footer'));
 
 function App() {
-  useEffect(() => {
-    // Initialize AOS animation library
-    AOS.init({
-      duration: 1000,
-      once: true,
-      easing: 'ease',
-    });
-  }, []);
-
   return (
-    <div className="relative min-h-screen">
-      {/* Three.js Background */}
-      <div className="fixed inset-0 z-0">
-        <ThreeDBackground />
-      </div>
-
-      {/* Content */}
-      <div className="relative z-10">
-        <Navbar />
-        <main>
-          <Home />
-          <About />
-          <Projects />
-          <Skills />
-          <Contact />
-        </main>
-        <Footer />
-      </div>
+    <div className="min-h-screen">
+      <StarBackground />
+      <CursorEffect />
+      
+      <Suspense fallback={<LoadingSpinner />}>
+        <PageTransition>
+          <div className="relative z-10">
+            <Navbar />
+            <main className="overflow-hidden">
+              <Home />
+              <About />
+              <Skills />
+              <Projects />
+              <Experience />
+              <Contact />
+            </main>
+            <Footer />
+          </div>
+        </PageTransition>
+      </Suspense>
     </div>
   );
 }
