@@ -18,16 +18,8 @@ const StarBackground = () => {
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     sceneRef.current.appendChild(renderer.domElement);
 
-    // Add lights
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
-    scene.add(ambientLight);
-    
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
-    directionalLight.position.set(5, 5, 5);
-    scene.add(directionalLight);
-
     // Create star field
-    const starsCount = 5000;
+    const starsCount = 7000; // Increased star count
     const starsGeometry = new THREE.BufferGeometry();
     const starsPositions = new Float32Array(starsCount * 3);
 
@@ -41,7 +33,7 @@ const StarBackground = () => {
     
     const starsMaterial = new THREE.PointsMaterial({ 
       color: 0xffffff,
-      size: 0.1,
+      size: 0.15, // Slightly increased size
       transparent: true,
       opacity: 1,
       blending: THREE.AdditiveBlending,
@@ -67,8 +59,9 @@ const StarBackground = () => {
     let frame = 0;
     const animate = () => {
       frame = requestAnimationFrame(animate);
-      stars.rotation.z += 0.0002;
-      stars.rotation.y += 0.0001;
+      stars.rotation.z += 0.0004; // Increased rotation speed
+      stars.rotation.x += 0.0002; // Added X rotation
+      stars.rotation.y += 0.0003; // Added Y rotation
       renderer.render(scene, camera);
     };
 
@@ -92,7 +85,7 @@ const StarBackground = () => {
       ref={sceneRef} 
       className="fixed inset-0 -z-10"
       style={{
-        background: 'linear-gradient(to bottom, #000000, #0a0a1a)',
+        background: 'linear-gradient(to bottom, #000000, #0a0118)',
         pointerEvents: 'none',
       }}
     />

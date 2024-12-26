@@ -6,78 +6,87 @@ const CursorEffect = () => {
   const [isHovering, setIsHovering] = useState(false);
 
   useEffect(() => {
-    const updateMousePosition = (e) => {
+    const handleMouseMove = (e) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
     };
 
-    window.addEventListener('mousemove', updateMousePosition);
-
-    // Add hover detection
     const handleMouseOver = (e) => {
-      if (e.target.closest('a, button, [role="button"]')) {
+      if (e.target.tagName === 'A' || 
+          e.target.tagName === 'BUTTON' || 
+          e.target.closest('button') || 
+          e.target.closest('a') ||
+          e.target.classList.contains('hoverable')) {
         setIsHovering(true);
       } else {
         setIsHovering(false);
       }
     };
 
+    window.addEventListener('mousemove', handleMouseMove);
     window.addEventListener('mouseover', handleMouseOver);
 
     return () => {
-      window.removeEventListener('mousemove', updateMousePosition);
+      window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('mouseover', handleMouseOver);
     };
   }, []);
+
+  const variants = {
+    default: {
+      x: mousePosition.x - 16,
+      y: mousePosition.y - 16,
+      transition: {
+        type: "spring",
+        mass: 0.2,
+        stiffness: 800,
+        damping: 30
+      }
+    },
+    hover: {
+      height: 60,
+      width: 60,
+      x: mousePosition.x - 30,
+      y: mousePosition.y - 30,
+      backgroundColor: "rgba(138, 43, 226, 0.2)",
+      mixBlendMode: "difference",
+      transition: {
+        type: "spring",
+        mass: 0.2,
+        stiffness: 800,
+        damping: 30
+      }
+    }
+  };
 
   return (
     <>
       <motion.div
         className="cursor-dot"
-        animate={{
-          x: mousePosition.x - 4,
-          y: mousePosition.y - 4,
-          scale: isHovering ? 1.5 : 1,
-        }}
-        transition={{
-          type: "spring",
-          stiffness: 500,
-          damping: 28,
-          mass: 0.5,
-        }}
+        variants={variants}
+        animate={isHovering ? "hover" : "default"}
         style={{
           position: 'fixed',
           zIndex: 9999,
           pointerEvents: 'none',
-          width: '8px',
-          height: '8px',
-          backgroundColor: 'rgb(139, 92, 246)',
+          height: 32,
+          width: 32,
           borderRadius: '50%',
-          mixBlendMode: 'difference',
+          backgroundColor: 'rgba(138, 43, 226, 0.5)',
+          mixBlendMode: 'difference'
         }}
       />
       <motion.div
-        className="cursor-ring"
-        animate={{
-          x: mousePosition.x - 16,
-          y: mousePosition.y - 16,
-          scale: isHovering ? 1.8 : 1,
-        }}
-        transition={{
-          type: "spring",
-          stiffness: 250,
-          damping: 20,
-          mass: 0.5,
-        }}
         style={{
           position: 'fixed',
           zIndex: 9998,
           pointerEvents: 'none',
-          width: '32px',
-          height: '32px',
-          border: '2px solid rgb(139, 92, 246)',
+          height: 8,
+          width: 8,
           borderRadius: '50%',
-          opacity: 0.5,
-          mixBlendMode: 'difference',
+          backgroundColor: 'white',
+          left: mousePosition.x - 4,
+          top: mousePosition.y - 4,
+          mixBlendMode: 'difference'
         }}
       />
     </>

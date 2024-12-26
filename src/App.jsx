@@ -1,41 +1,36 @@
-import React, { Suspense, lazy } from 'react';
+import React, { useState } from 'react';
+import { AnimatePresence } from 'framer-motion';
+import Home from './components/Home';
+import About from './components/About';
+import Skills from './components/Skills';
+import Experience from './components/Experience';
+import Projects from './components/Projects';
+import Contact from './components/Contact';
 import CursorEffect from './components/CursorEffect';
-import LoadingSpinner from './components/LoadingSpinner';
-import PageTransition from './components/PageTransition';
-import StarBackground from './components/StarBackground';
-
-// Lazy load components for better performance
-const Navbar = lazy(() => import('./components/Navbar'));
-const Home = lazy(() => import('./components/Home'));
-const About = lazy(() => import('./components/About'));
-const Skills = lazy(() => import('./components/Skills'));
-const Projects = lazy(() => import('./components/Projects'));
-const Experience = lazy(() => import('./components/Experience'));
-const Contact = lazy(() => import('./components/Contact'));
-const Footer = lazy(() => import('./components/Footer'));
+import LoadingState from './components/LoadingState';
 
 function App() {
+  const [isLoading, setIsLoading] = useState(true);
+
   return (
-    <div className="min-h-screen">
-      <StarBackground />
-      <CursorEffect />
-      
-      <Suspense fallback={<LoadingSpinner />}>
-        <PageTransition>
-          <div className="relative z-10">
-            <Navbar />
-            <main className="overflow-hidden">
-              <Home />
-              <About />
-              <Skills />
-              <Projects />
-              <Experience />
-              <Contact />
-            </main>
-            <Footer />
-          </div>
-        </PageTransition>
-      </Suspense>
+    <div className="relative">
+      <AnimatePresence mode="wait">
+        {isLoading && (
+          <LoadingState onLoadingComplete={() => setIsLoading(false)} />
+        )}
+      </AnimatePresence>
+
+      {!isLoading && (
+        <>
+          <CursorEffect />
+          <Home />
+          <About />
+          <Skills />
+          <Experience />
+          <Projects />
+          <Contact />
+        </>
+      )}
     </div>
   );
 }

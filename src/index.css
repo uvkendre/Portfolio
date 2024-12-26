@@ -54,29 +54,6 @@
   .body-text {
     @apply text-base md:text-lg;
   }
-
-  /* Card Styles */
-  .card {
-    @apply glass-card p-6 hover:bg-white/10 transition-all duration-300;
-  }
-
-  /* Button Styles */
-  .btn {
-    @apply glass-button px-6 py-2 font-medium;
-  }
-
-  .btn-primary {
-    @apply bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white;
-  }
-
-  /* Section Styles */
-  .section {
-    @apply relative z-10 min-h-screen py-20 px-4;
-  }
-
-  .section-content {
-    @apply max-w-6xl mx-auto;
-  }
 }
 
 @layer utilities {
@@ -103,28 +80,34 @@
     @apply bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-purple-600;
   }
 
-  /* Animations */
-  @keyframes float {
-    0%, 100% {
+  /* Loading Animation */
+  @keyframes slide {
+    0% {
       transform: translateY(0);
     }
-    50% {
-      transform: translateY(-10px);
+    100% {
+      transform: translateY(-50%);
     }
   }
 
-  .animate-float {
-    animation: float 3s ease-in-out infinite;
+  .animate-slide {
+    animation: slide 20s linear infinite;
   }
 
-  /* Page Transitions */
-  .page-transition {
-    @apply transition-all duration-300 ease-in-out;
+  /* Matrix-like code rain effect */
+  .code-rain {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
   }
 
-  /* Hover Effects */
-  .hover-lift {
-    @apply transition-transform duration-300 hover:-translate-y-1;
+  .code-rain span {
+    color: theme('colors.purple.500');
+    opacity: 0;
+    animation: rain 2s linear infinite;
   }
 }
 

@@ -1,10 +1,8 @@
-import React, { useRef, useEffect } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { FaCode, FaServer, FaMobile, FaDatabase } from 'react-icons/fa';
-import * as THREE from 'three';
 
 const About = () => {
-  const sceneRef = useRef();
   const services = [
     {
       icon: <FaCode />,
@@ -28,166 +26,82 @@ const About = () => {
     }
   ];
 
-  useEffect(() => {
-    // Create scene, camera, and renderer
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer({ 
-      alpha: true,
-      antialias: true,
-      powerPreference: "high-performance"
-    });
-    
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    sceneRef.current.appendChild(renderer.domElement);
-
-    // Add lights
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
-    scene.add(ambientLight);
-    
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
-    directionalLight.position.set(5, 5, 5);
-    scene.add(directionalLight);
-
-    // Create star field
-    const starsCount = 5000;
-    const starsGeometry = new THREE.BufferGeometry();
-    const starsPositions = new Float32Array(starsCount * 3);
-
-    for (let i = 0; i < starsCount; i++) {
-      starsPositions[i * 3] = (Math.random() - 0.5) * 200;
-      starsPositions[i * 3 + 1] = (Math.random() - 0.5) * 200;
-      starsPositions[i * 3 + 2] = (Math.random() - 0.5) * 200;
-    }
-
-    starsGeometry.setAttribute('position', new THREE.BufferAttribute(starsPositions, 3));
-    
-    const starsMaterial = new THREE.PointsMaterial({ 
-      color: 0xffffff,
-      size: 0.1,
-      transparent: true,
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
       opacity: 1,
-      blending: THREE.AdditiveBlending,
-      depthWrite: false,
-    });
-    
-    const stars = new THREE.Points(starsGeometry, starsMaterial);
-    scene.add(stars);
-
-    // Set camera position
-    camera.position.z = 3;
-
-    // Handle window resize
-    const handleResize = () => {
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-    };
-
-    window.addEventListener('resize', handleResize);
-
-    // Animation loop
-    let frame = 0;
-    const animate = () => {
-      frame = requestAnimationFrame(animate);
-      stars.rotation.z += 0.0002;
-      stars.rotation.y += 0.0001;
-      renderer.render(scene, camera);
-    };
-
-    animate();
-
-    // Cleanup
-    return () => {
-      window.removeEventListener('resize', handleResize);
-      cancelAnimationFrame(frame);
-      if (sceneRef.current) {
-        sceneRef.current.removeChild(renderer.domElement);
+      transition: {
+        delayChildren: 0.3,
+        staggerChildren: 0.2
       }
-      renderer.dispose();
-      starsGeometry.dispose();
-      starsMaterial.dispose();
-    };
-  }, []);
+    }
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1
+    }
+  };
 
   return (
-    <div id="about" className="min-h-screen relative">
-      {/* Three.js Background */}
-      <div ref={sceneRef} className="absolute inset-0 -z-10" />
-
-      <div className="relative z-10 max-w-6xl mx-auto px-4 py-20">
+    <section id="about" className="min-h-screen py-20 relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
           className="text-center mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-purple-600 mb-6">
-            About Me
-          </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-purple-400 to-purple-600 mx-auto mb-8" />
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 gradient-text">About Me</h2>
           <p className="text-gray-300 max-w-2xl mx-auto">
-            I'm a passionate Full Stack Developer with a focus on creating beautiful and functional web applications.
+            Passionate Full Stack Developer with expertise in building modern web applications.
+            I transform ideas into scalable and efficient solutions.
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-8 mb-16">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="glass-card p-6"
-          >
-            <h3 className="text-2xl font-bold text-purple-400 mb-4">My Journey</h3>
-            <p className="text-gray-300">
-              With a strong foundation in web development, I've been crafting digital experiences that combine creativity with technical expertise. My journey in tech started with a curiosity about how websites work, which led me to dive deep into full-stack development.
-            </p>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="glass-card p-6"
-          >
-            <h3 className="text-2xl font-bold text-purple-400 mb-4">My Approach</h3>
-            <p className="text-gray-300">
-              I believe in writing clean, maintainable code and creating user-friendly interfaces. My approach combines modern design principles with robust functionality, ensuring that each project not only looks great but performs excellently.
-            </p>
-          </motion.div>
-        </div>
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
+        >
+          {services.map((service, index) => (
+            <motion.div
+              key={index}
+              variants={itemVariants}
+              className="backdrop-blur-sm p-6 rounded-xl border border-purple-500/10 hover:border-purple-500/30 transition-all duration-300"
+            >
+              <div className="text-4xl mb-4 text-purple-500">
+                {service.icon}
+              </div>
+              <h3 className="text-xl font-semibold mb-2 text-white">{service.title}</h3>
+              <p className="text-gray-400">{service.description}</p>
+            </motion.div>
+          ))}
+        </motion.div>
 
         <motion.div
+          className="mt-20 text-center"
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
         >
-          <h3 className="text-2xl font-bold text-center text-purple-400 mb-8">What I Do</h3>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {services.map((service, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.2 * index }}
-                className="glass-card p-6 text-center group hover:bg-purple-900/20 transition-all duration-300"
-              >
-                <motion.div
-                  whileHover={{ scale: 1.1, rotate: 360 }}
-                  transition={{ type: "spring", stiffness: 260, damping: 20 }}
-                  className="text-3xl text-purple-400 mb-4 inline-block"
-                >
-                  {service.icon}
-                </motion.div>
-                <h4 className="text-xl font-semibold text-purple-300 mb-2">{service.title}</h4>
-                <p className="text-gray-400">{service.description}</p>
-              </motion.div>
-            ))}
-          </div>
+          <h3 className="text-2xl md:text-3xl font-semibold mb-6 gradient-text">
+            Let's Build Something Amazing Together
+          </h3>
+          <p className="text-gray-300 max-w-3xl mx-auto">
+            With a strong foundation in both frontend and backend technologies,
+            I'm ready to take on new challenges and create innovative solutions
+            that make a difference.
+          </p>
         </motion.div>
       </div>
-    </div>
+    </section>
   );
 };
 
