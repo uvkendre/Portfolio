@@ -1,15 +1,65 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaLinkedin, FaGithub, FaPaperPlane } from 'react-icons/fa';
+import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaLinkedin, FaGithub } from 'react-icons/fa';
 
 const Contact = () => {
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        delayChildren: 0.3,
+        staggerChildren: 0.2
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1
+    }
+  };
+
+  const contactInfo = [
+    {
+      icon: <FaEnvelope className="text-2xl" />,
+      content: "yuvikendre2002@gmail.com",
+      href: "mailto:yuvikendre2002@gmail.com"
+    },
+    {
+      icon: <FaPhone className="text-2xl" />,
+      content: "+91 7498669375",
+      href: "tel:7498669375"
+    },
+    {
+      icon: <FaMapMarkerAlt className="text-2xl" />,
+      content: "Nanded, Maharashtra, India",
+      href: null
+    }
+  ];
+
+  const socialLinks = [
+    {
+      icon: <FaLinkedin size={28} />,
+      href: "https://linkedin.com/in/uvkendre",
+      label: "LinkedIn"
+    },
+    {
+      icon: <FaGithub size={28} />,
+      href: "https://github.com/uvkendre",
+      label: "GitHub"
+    }
+  ];
+
   return (
-    <div id="contact" className="min-h-screen py-20 relative">
-      <div className="max-w-6xl mx-auto px-4 relative z-10">
+    <section id="contact" className="min-h-screen py-20 relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-purple-600 mb-6">
@@ -21,134 +71,65 @@ const Contact = () => {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-8">
-          {/* Contact Information */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="space-y-6"
-          >
-            <div className="glass-card p-6">
-              <h3 className="text-2xl font-bold text-purple-400 mb-6">Contact Information</h3>
-              
-              <div className="space-y-4">
-                <motion.div 
-                  className="flex items-center gap-4 text-gray-300"
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          className="max-w-3xl mx-auto"
+        >
+          <div className="glass-card p-8 backdrop-blur-sm bg-slate-950 bg-black/30 rounded-xl border border-white/10">
+            {/* Contact Information */}
+            <motion.div variants={itemVariants} className="space-y-8 mb-12">
+              {contactInfo.map((info, index) => (
+                <motion.div
+                  key={index}
+                  className="flex items-center gap-6 text-gray-300 group"
                   whileHover={{ x: 10 }}
                   transition={{ type: "spring", stiffness: 400, damping: 10 }}
                 >
-                  <FaEnvelope className="text-xl text-purple-400" />
-                  <a href="mailto:yuvikendre2002@gmail.com" className="hover:text-purple-400 transition-colors">
-                    yuvikendre2002@gmail.com
-                  </a>
+                  <span className="text-white group-hover:text-white/80 transition-colors">
+                    {info.icon}
+                  </span>
+                  {info.href ? (
+                    <a 
+                      href={info.href}
+                      className="text-lg hover:text-white transition-colors"
+                    >
+                      {info.content}
+                    </a>
+                  ) : (
+                    <span className="text-lg">{info.content}</span>
+                  )}
                 </motion.div>
+              ))}
+            </motion.div>
 
-                <motion.div 
-                  className="flex items-center gap-4 text-gray-300"
-                  whileHover={{ x: 10 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                >
-                  <FaPhone className="text-xl text-purple-400" />
-                  <a href="tel:7498669375" className="hover:text-purple-400 transition-colors">
-                    +91 7498669375
-                  </a>
-                </motion.div>
-
-                <motion.div 
-                  className="flex items-center gap-4 text-gray-300"
-                  whileHover={{ x: 10 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                >
-                  <FaMapMarkerAlt className="text-xl text-purple-400" />
-                  <span>Nanded, Maharashtra, India</span>
-                </motion.div>
-              </div>
-
-              {/* Social Links */}
-              <div className="mt-8">
-                <h4 className="text-lg font-semibold text-purple-400 mb-4">Connect With Me</h4>
-                <div className="flex gap-4">
+            {/* Social Links */}
+            <motion.div variants={itemVariants} className="text-center">
+              <h3 className="text-xl font-semibold text-white mb-6">
+                Connect With Me
+              </h3>
+              <div className="flex justify-center gap-8">
+                {socialLinks.map((social, index) => (
                   <motion.a
-                    href="https://linkedin.com/in/uvkendre"
+                    key={index}
+                    href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-gray-300 hover:text-purple-400 transition-colors"
+                    className="text-gray-300 hover:text-white transition-colors"
                     whileHover={{ scale: 1.1, rotate: 10 }}
                     whileTap={{ scale: 0.9 }}
+                    aria-label={social.label}
                   >
-                    <FaLinkedin size={24} />
+                    {social.icon}
                   </motion.a>
-                  <motion.a
-                    href="https://github.com/uvkendre"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-gray-300 hover:text-purple-400 transition-colors"
-                    whileHover={{ scale: 1.1, rotate: 10 }}
-                    whileTap={{ scale: 0.9 }}
-                  >
-                    <FaGithub size={24} />
-                  </motion.a>
-                </div>
+                ))}
               </div>
-            </div>
-          </motion.div>
-
-          {/* Contact Form */}
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-          >
-            <form className="glass-card p-6">
-              <h3 className="text-2xl font-bold text-purple-400 mb-6">Send Message</h3>
-              
-              <div className="space-y-4">
-                <div>
-                  <label htmlFor="name" className="block text-gray-300 mb-2">Name</label>
-                  <input
-                    type="text"
-                    id="name"
-                    className="w-full px-4 py-2 rounded-lg bg-white/5 border border-purple-500/20 text-gray-300 focus:outline-none focus:border-purple-500/40"
-                    placeholder="Your Name"
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="email" className="block text-gray-300 mb-2">Email</label>
-                  <input
-                    type="email"
-                    id="email"
-                    className="w-full px-4 py-2 rounded-lg bg-white/5 border border-purple-500/20 text-gray-300 focus:outline-none focus:border-purple-500/40"
-                    placeholder="Your Email"
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="message" className="block text-gray-300 mb-2">Message</label>
-                  <textarea
-                    id="message"
-                    rows="4"
-                    className="w-full px-4 py-2 rounded-lg bg-white/5 border border-purple-500/20 text-gray-300 focus:outline-none focus:border-purple-500/40"
-                    placeholder="Your Message"
-                  ></textarea>
-                </div>
-
-                <motion.button
-                  type="submit"
-                  className="w-full py-3 px-6 rounded-lg bg-gradient-to-r from-purple-400 to-purple-600 text-white font-semibold flex items-center justify-center gap-2 hover:from-purple-500 hover:to-purple-700 transition-all"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  <FaPaperPlane />
-                  Send Message
-                </motion.button>
-              </div>
-            </form>
-          </motion.div>
-        </div>
+            </motion.div>
+          </div>
+        </motion.div>
       </div>
-    </div>
+    </section>
   );
 };
 

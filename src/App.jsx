@@ -6,8 +6,8 @@ import Skills from './components/Skills';
 import Experience from './components/Experience';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
-import CursorEffect from './components/CursorEffect';
 import LoadingState from './components/LoadingState';
+import Navbar from './components/Navbar';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -22,7 +22,7 @@ function App() {
 
       {!isLoading && (
         <>
-          <CursorEffect />
+          <Navbar />
           <Home />
           <About />
           <Skills />

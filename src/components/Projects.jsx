@@ -5,6 +5,38 @@ import { SiMongodb, SiExpress, SiTailwindcss, SiTypescript, SiJavascript, SiHtml
 
 const projects = [
   {
+    title: 'Kuulo Shopping Store',
+    description: 'A contemporary online shopping platform featuring an elegant interface, product listings, a cart system, and a secure payment process.',
+    longDescription: 'Kuulo Shopping Store is a comprehensive e-commerce solution featuring product categorization, user authentication, shopping cart functionality, and a streamlined checkout process. Built with React for optimal performance and user experience.',
+    github: '#',
+    live: 'https://kullohearing.platypusbox.com/',
+    tech: ['react', 'javascript', 'html', 'css'],
+    category: 'fullstack',
+    features: ['Responsive Design', 'Shopping Cart', 'Product Search', 'User Authentication'],
+    highlights: ['Modern UI/UX', 'Performance Optimized', 'Mobile First Design'],
+    challenges: ['Complex State Management', 'Real-time Updates', 'Performance Optimization'],
+    learnings: ['Advanced React Patterns', 'State Management', 'Performance Tuning'],
+    timeline: '3 months',
+    role: 'Full Stack Developer',
+    impact: ['Improved user engagement', 'Faster load times', 'Better conversion rates']
+  },
+  {
+    title: 'PlatypusBox Organization',
+    description: 'I developed a sleek website for PlatypusBox, a software company focused on innovative solutions, user experience, and practical functionality.',
+    longDescription: 'I have developed a website for PlatypusBox, a dynamic software development company committed to delivering innovative solutions that empower businesses and individuals. The platform showcases their expertise in cutting-edge technology, emphasizing user experience and practical functionality. With a sleek and modern design, the website highlights their services, portfolio, and vision, ensuring an engaging and seamless user experience.',
+    github: '#',
+    live: 'https://www.platypusbox.com/',
+    tech: ['react', 'javascript', 'html', 'css'],
+    category: 'frontend',
+    features: ['Responsive Design', 'Shopping Cart', 'Product Search', 'User Authentication'],
+    highlights: ['Modern UI/UX', 'Performance Optimized', 'Mobile First Design'],
+    challenges: ['Complex State Management', 'Real-time Updates', 'Performance Optimization'],
+    learnings: ['Advanced React Patterns', 'State Management', 'Performance Tuning'],
+    timeline: '3 months',
+    role: 'Full Stack Developer',
+    impact: ['Improved user engagement', 'Faster load times', 'Better conversion rates']
+  },
+  {
     title: 'E-Shop',
     description: 'A modern e-commerce platform with a sleek UI, product catalog, shopping cart, and secure checkout process.',
     longDescription: 'E-Shop is a comprehensive e-commerce solution featuring product categorization, user authentication, shopping cart functionality, and a streamlined checkout process. Built with React for optimal performance and user experience.',
@@ -231,7 +263,7 @@ function Projects() {
           </p>
 
           {/* Search Bar */}
-          <div className="relative max-w-md mx-auto">
+          {/* <div className="relative max-w-md mx-auto">
             <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
             <input
               type="text"
@@ -240,7 +272,7 @@ function Projects() {
               onChange={(e) => setSearchTerm(e.target.value)}
               className="w-full pl-10 pr-4 py-2 rounded-full bg-purple-900/20 border border-purple-500/20 text-gray-300 focus:outline-none focus:border-purple-500/40 backdrop-blur-sm"
             />
-          </div>
+          </div> */}
         </motion.div>
 
         {/* Projects Grid */}

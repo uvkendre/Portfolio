@@ -23,17 +23,17 @@ const LoadingState = ({ onLoadingComplete }) => {
     {
       command: '> initializing dev mode',
       result: 'loading skills...',
-      color: 'text-purple-500'
+      color: 'text-white'
     },
     {
       command: '> deploying portfolio',
       result: 'preparing experience...',
-      color: 'text-blue-400'
+      color: 'text-white'
     },
     {
       command: '> launch sequence',
       result: 'ready for takeoff...',
-      color: 'text-green-500'
+      color: 'text-white'
     }
   ];
 
@@ -47,24 +47,23 @@ const LoadingState = ({ onLoadingComplete }) => {
         return;
       }
 
-      // Faster typing speed (50ms per character)
       for (let i = 0; i <= phase.command.length; i++) {
         await new Promise(resolve => {
           timeout = setTimeout(() => {
             setCurrentText(phase.command.slice(0, i));
             resolve();
-          }, 30); // Much faster typing
+          }, 30);
         });
       }
 
       await new Promise(resolve => {
-        timeout = setTimeout(resolve, 300); // Shorter pause
+        timeout = setTimeout(resolve, 300);
       });
 
       timeout = setTimeout(() => {
         setCurrentPhase(prev => prev + 1);
         setCurrentText('');
-      }, 400); // Shorter display time
+      }, 400);
     };
 
     typeText();
@@ -90,7 +89,7 @@ const LoadingState = ({ onLoadingComplete }) => {
     >
       <StarBackground />
 
-      {/* Brighter Falling Code */}
+      {/* Falling Code */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {Array.from({ length: 10 }).map((_, i) => (
           <motion.div
@@ -117,31 +116,28 @@ const LoadingState = ({ onLoadingComplete }) => {
               delay: Math.random() * 2
             }}
           >
-            <div className="relative group">
-              <div className="absolute inset-0 bg-purple-500 rounded-xl blur-xl opacity-50 group-hover:opacity-75 transition-opacity" />
-              <pre className="relative font-mono text-lg md:text-xl whitespace-pre bg-black/80 rounded-xl p-4 border-2 border-purple-500 shadow-[0_0_30px_rgba(168,85,247,0.5)]">
-                <code className="text-white">
-                  {codeSnippets[Math.floor(Math.random() * codeSnippets.length)]}
-                </code>
-              </pre>
-            </div>
+            <pre className="font-mono text-lg md:text-xl whitespace-pre bg-black/40 backdrop-blur-sm rounded-xl p-4 border border-white/10">
+              <code className="text-white/80">
+                {codeSnippets[Math.floor(Math.random() * codeSnippets.length)]}
+              </code>
+            </pre>
           </motion.div>
         ))}
       </div>
 
       {/* Terminal Window */}
       <motion.div
-        className="relative w-11/12 max-w-2xl bg-black/80 backdrop-blur-sm rounded-lg border border-purple-500/50"
+        className="relative w-11/12 max-w-2xl bg-black/40 backdrop-blur-sm rounded-lg border border-white/10"
         initial={{ y: 20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.3 }}
       >
         {/* Terminal Header */}
-        <div className="flex items-center gap-2 px-4 py-3 border-b border-purple-500/20">
+        <div className="flex items-center gap-2 px-4 py-3 border-b border-white/10">
           <div className="w-3 h-3 rounded-full bg-red-500/80" />
           <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
           <div className="w-3 h-3 rounded-full bg-green-500/80" />
-          <span className="ml-2 text-sm text-purple-300 font-medium">portfolio.exe</span>
+          <span className="ml-2 text-sm text-white/70 font-medium">portfolio.exe</span>
         </div>
 
         {/* Terminal Content */}
@@ -149,19 +145,19 @@ const LoadingState = ({ onLoadingComplete }) => {
           <div className="space-y-2">
             {currentPhase > 0 && phases.slice(0, currentPhase).map((phase, index) => (
               <div key={index} className="space-y-1">
-                <div className={phase.color}>{phase.command}</div>
-                <div className="text-gray-400">{phase.result}</div>
+                <div className="text-white">{phase.command}</div>
+                <div className="text-white/60">{phase.result}</div>
               </div>
             ))}
             
             {/* Current typing line */}
             <div className="space-y-1">
-              <div className={phases[currentPhase]?.color || 'text-white'}>
+              <div className="text-white">
                 {currentText}
-                {showCursor && <span className="inline-block w-2 h-5 ml-1 bg-purple-400" />}
+                {showCursor && <span className="inline-block w-2 h-5 ml-1 bg-white/80" />}
               </div>
               {currentText === phases[currentPhase]?.command && (
-                <div className="text-gray-400">{phases[currentPhase]?.result}</div>
+                <div className="text-white/60">{phases[currentPhase]?.result}</div>
               )}
             </div>
           </div>

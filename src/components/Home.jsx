@@ -126,7 +126,7 @@ const Home = () => {
                   to="contact"
                   smooth={true}
                   duration={500}
-                  className="btn btn-primary"
+                  className="btn btn-primary bg-[#6366f1] text-white rounded-full p-2"
                 >
                   Contact Me
                 </Link>
@@ -141,7 +141,7 @@ const Home = () => {
                   to="projects"
                   smooth={true}
                   duration={500}
-                  className="btn glass-button"
+                  className="btn glass-button p-2"
                 >
                   View Projects
                 </Link>

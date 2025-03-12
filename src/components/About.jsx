@@ -46,7 +46,7 @@ const About = () => {
   };
 
   return (
-    <section id="about" className="min-h-screen py-20 relative overflow-hidden">
+    <section id="about" className="min-h-screen py-20 relative overflow-hidden ">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
           className="text-center mb-16"
@@ -67,13 +67,13 @@ const About = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 "
         >
           {services.map((service, index) => (
             <motion.div
               key={index}
               variants={itemVariants}
-              className="backdrop-blur-sm p-6 rounded-xl border border-purple-500/10 hover:border-purple-500/30 transition-all duration-300"
+              className="backdrop-blur-sm p-6 rounded-xl border bg-slate-950 border-purple-500/10 hover:border-purple-500/30 transition-all duration-300"
             >
               <div className="text-4xl mb-4 text-purple-500">
                 {service.icon}
